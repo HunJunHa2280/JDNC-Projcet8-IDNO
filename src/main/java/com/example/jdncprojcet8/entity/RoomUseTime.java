@@ -16,7 +16,7 @@ public class RoomUseTime {
     // 말이 안되기 때문에 이 키값은 db가 생성될때 하나여야 되니까
 
     @Column
-    private boolean cancel;
+    private boolean canUse;
     @Column
     private String time;
 
@@ -24,6 +24,6 @@ public class RoomUseTime {
     @JoinColumn(name = "room_id")
     private Room room;
 
-
-
+    @OneToOne(mappedBy = "room_use_time")
+    private RoomReservationList roomReservationList;
 }
