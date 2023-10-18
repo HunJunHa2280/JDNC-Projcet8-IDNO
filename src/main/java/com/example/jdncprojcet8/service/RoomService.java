@@ -19,10 +19,14 @@ public class RoomService {
     private final RoomUseTimeRepository useTimeRepository;
 
     public ResponseDto createBook(RequestDto requestDto) {
-
-        return null;
+        RoomUseTime useTime = useTimeRepository.findById(requestDto.getId()).orElseThrow(()->
+                new NullPointerException("잘못된 접근입니다."));
+        useTime.set(!requestDto.isCheck());
+        useTimeRepository.save(useTime);
+        ResponseDto responseDto = new ResponseDto("유저 정보가 없습니다.");
+        return responseDto;
+        //최종 예약하기
     }
-
 
     public List<Room> getRoom(String floors) {
         List<Room> roomList = roomRepository.findAllByFloors(floors);
@@ -34,7 +38,7 @@ public class RoomService {
         -> new NullPointerException("해당 접근은 잘못된 접근입니다."));
         List<RoomUseTime> roomUseTimeList = useTimeRepository.findAllByRoom(room);
         return roomUseTimeList;
+        // 개별 조회
     }
-
 
 }

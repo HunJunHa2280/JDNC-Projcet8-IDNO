@@ -26,4 +26,8 @@ public class RoomUseTime {
 
     @OneToOne(mappedBy = "room_use_time")
     private RoomReservationList roomReservationList;
+
+    public void set(boolean b) {
+        this.canUse = b;
+    }
 }
