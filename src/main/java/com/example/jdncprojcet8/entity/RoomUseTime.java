@@ -1,5 +1,6 @@
 package com.example.jdncprojcet8.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,18 +17,20 @@ public class RoomUseTime {
     // 말이 안되기 때문에 이 키값은 db가 생성될때 하나여야 되니까
 
     @Column
-    private boolean canUse;
+    private boolean timeAvailable;
     @Column
     private String time;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "room_use_time")
     private RoomReservationList roomReservationList;
 
     public void set(boolean b) {
-        this.canUse = b;
+        this.timeAvailable = b;
     }
 }

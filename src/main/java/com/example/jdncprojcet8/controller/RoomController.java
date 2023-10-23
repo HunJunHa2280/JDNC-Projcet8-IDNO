@@ -25,8 +25,8 @@ public class RoomController {
         return roomService.getRoom(floors);
     }
 
-    @GetMapping("/room/{id}")
-    public List<RoomUseTime> getAllRoom(@PathVariable Long id) {
+    @GetMapping("/room-time/{id}")
+    public List<RoomUseTime> getAllRoomTime(@PathVariable Long id) {
         return roomService.getRoomTime(id);
     }
 

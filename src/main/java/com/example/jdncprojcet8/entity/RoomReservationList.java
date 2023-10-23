@@ -22,7 +22,7 @@ public class RoomReservationList {
     // 하면 복잡해지니까
 
     @OneToOne
-    @JoinColumn(name = "room_use_time")
-    private RoomUseTime roomUseTime;
+    @JoinColumn(name = "room_use_time_id")
+    private RoomUseTime room_use_time;
 
 }

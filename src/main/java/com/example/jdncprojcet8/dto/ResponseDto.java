@@ -10,4 +10,5 @@ public class ResponseDto {
     public ResponseDto(String s) {
         this.msg = s;
     }
+    // 다른 사람이 봐도 알 수 있게끔 String에 s만 해놓지 말고 제대로 알 수 있게 이름을 하자
 }

@@ -1,7 +1,6 @@
 package com.example.jdncprojcet8.entity;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -13,10 +12,14 @@ public class Room {
     private Long id;
 
     @Column
-    private String name;
+    private String roomName;
+    // 중간에 언더바를 사용하면 쿼리문이라 인식을 못함
     @Column
-    private boolean canUse;
+    private boolean roomAvailable;
     @Column
     private String floors;
 
 }
+// "name"
+// "canUse"
+// "floors"
