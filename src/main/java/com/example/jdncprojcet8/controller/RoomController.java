@@ -1,6 +1,7 @@
 package com.example.jdncprojcet8.controller;
 
 
+import com.example.jdncprojcet8.dto.CancelRequestDto;
 import com.example.jdncprojcet8.dto.RequestDto;
 import com.example.jdncprojcet8.dto.ResponseDto;
 import com.example.jdncprojcet8.entity.Room;
@@ -30,9 +31,15 @@ public class RoomController {
         return roomService.getRoomTime(id);
     }
 
-    @PostMapping("/api/room/book")
+    @PostMapping("/room/book")
     public ResponseDto requestDto(@RequestBody RequestDto requestDto) {
         return roomService.createBook(requestDto);
     }
+
+//    @PutMapping("/room-time/{id}")
+//    public ResponseDto roomTimeCancel(@PathVariable Long id,
+//                                      @RequestBody RequestDto CancelRequestDto) {
+//        return roomService.update(id, CancelRequestDto);
+//    }
 
 }

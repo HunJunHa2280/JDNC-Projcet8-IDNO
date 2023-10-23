@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class ResponseDto {
+
     private String msg;
 
     public ResponseDto(String s) {

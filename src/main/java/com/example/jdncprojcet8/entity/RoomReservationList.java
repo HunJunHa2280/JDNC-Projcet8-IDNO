@@ -25,4 +25,9 @@ public class RoomReservationList {
     @JoinColumn(name = "room_use_time_id")
     private RoomUseTime room_use_time;
 
+    public void gain(String name, String roomName, RoomUseTime useTime) {
+        this.name = name;
+        this.roomName = roomName;
+        this.room_use_time = useTime;
+    }
 }
