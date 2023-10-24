@@ -1,5 +1,6 @@
 package com.example.jdncprojcet8.entity;
 
+import com.example.jdncprojcet8.dto.CancelRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -32,5 +33,9 @@ public class RoomUseTime {
 
     public void set(boolean b) {
         this.timeAvailable = b;
+    }
+
+    public void update(CancelRequestDto cancelRequestDto) {
+        this.timeAvailable = cancelRequestDto.isCheck();
     }
 }

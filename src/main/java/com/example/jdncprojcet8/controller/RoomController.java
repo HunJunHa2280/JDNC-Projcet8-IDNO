@@ -37,9 +37,8 @@ public class RoomController {
     }
 
 //    @PutMapping("/room-time/{id}")
-//    public ResponseDto roomTimeCancel(@PathVariable Long id,
-//                                      @RequestBody RequestDto CancelRequestDto) {
-//        return roomService.update(id, CancelRequestDto);
+//    public ResponseDto updateRoomTime(@PathVariable Long id, @RequestBody CancelRequestDto cancelRequestDto) {
+//        return roomService.updateRoomTime(id, cancelRequestDto);
 //    }
 
 }

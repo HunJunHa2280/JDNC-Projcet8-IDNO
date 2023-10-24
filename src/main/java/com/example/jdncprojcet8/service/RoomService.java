@@ -1,13 +1,16 @@
 package com.example.jdncprojcet8.service;
 
+import com.example.jdncprojcet8.dto.CancelRequestDto;
 import com.example.jdncprojcet8.dto.RequestDto;
 import com.example.jdncprojcet8.dto.ResponseDto;
 import com.example.jdncprojcet8.entity.Room;
 import com.example.jdncprojcet8.entity.RoomReservationList;
 import com.example.jdncprojcet8.entity.RoomUseTime;
+import com.example.jdncprojcet8.entity.User;
 import com.example.jdncprojcet8.repository.RoomRepository;
 import com.example.jdncprojcet8.repository.RoomReservationListRepository;
 import com.example.jdncprojcet8.repository.RoomUseTimeRepository;
+import com.example.jdncprojcet8.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,7 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final RoomUseTimeRepository useTimeRepository;
     private final RoomReservationListRepository roomReservationListRepository;
+    private final UserRepository userRepository;
 
     public ResponseDto createBook(RequestDto requestDto) {
         RoomUseTime useTime = useTimeRepository.findById(requestDto.getId()).orElseThrow(()->
@@ -27,7 +31,10 @@ public class RoomService {
         useTime.set(!requestDto.isCheck());
         useTimeRepository.save(useTime);
         RoomReservationList roomReservationList = new RoomReservationList();
-        String name = "하헌준";
+        User user = userRepository.findById(1L).orElseThrow(()
+        -> new NullPointerException("해당 인원은 없습니다."));
+        String name = user.getName();
+        // String name = "하헌준"
         roomReservationList.gain(name, useTime.getRoom().getRoomName(), useTime);
         ResponseDto responseDto = new ResponseDto("예약이 완료되었습니다.");
         roomReservationListRepository.save(roomReservationList);
@@ -47,11 +54,26 @@ public class RoomService {
         return roomUseTimeList;
         // 개별 조회
     }
-//    public ResponseDto update(Long id, RequestDto cancelRequestDto) {
-//        RoomUseTime roomUseTime = useTimeRepository.findById(id).orElseThrow(()->
-//                new NullPointerException("해당 접근은 잘못된 접근입니다."));
-//
-//        ustTime.set(cancelRequestDto);
-//        useTimeRepository.save(room)
-//    }
+
+    public ResponseDto updateRoomTime(Long id, CancelRequestDto cancelRequestDto) {
+        // 찾아 오기
+        RoomUseTime roomUseTime = useTimeRepository.findById(id).orElseThrow(()->
+           new NullPointerException("해당 접근은 잘못된 접근입니다."));
+            // 수정 하기
+            roomUseTime.update(cancelRequestDto);
+            // 수정된 정보를 DB에 저장 하기
+            useTimeRepository.save(roomUseTime);
+
+        RoomReservationList roomReservationList = new RoomReservationList();
+        User user = userRepository.findById(1L).orElseThrow(()
+                -> new NullPointerException("해당 인원은 없습니다."));
+
+        String name = user.getName();
+            roomReservationList.abc(roomUseTime, name,roomUseTime.getRoom().getRoomName());
+            roomReservationListRepository.save(roomReservationList);
+            return new ResponseDto("수정을 완료되었습니다.");
+
+
+    }
+
 }
