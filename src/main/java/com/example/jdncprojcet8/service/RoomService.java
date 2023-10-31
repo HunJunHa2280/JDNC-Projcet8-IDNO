@@ -6,11 +6,11 @@ import com.example.jdncprojcet8.dto.ResponseDto;
 import com.example.jdncprojcet8.entity.Room;
 import com.example.jdncprojcet8.entity.RoomReservationList;
 import com.example.jdncprojcet8.entity.RoomUseTime;
-import com.example.jdncprojcet8.entity.User;
+import com.example.jdncprojcet8.entity.Users;
 import com.example.jdncprojcet8.repository.RoomRepository;
 import com.example.jdncprojcet8.repository.RoomReservationListRepository;
 import com.example.jdncprojcet8.repository.RoomUseTimeRepository;
-import com.example.jdncprojcet8.repository.UserRepository;
+import com.example.jdncprojcet8.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final RoomUseTimeRepository useTimeRepository;
     private final RoomReservationListRepository roomReservationListRepository;
-    private final UserRepository userRepository;
+    private final UsersRepository usersRepository;
 
     public ResponseDto createBook(RequestDto requestDto) {
         RoomUseTime useTime = useTimeRepository.findById(requestDto.getId()).orElseThrow(()->
@@ -31,10 +31,10 @@ public class RoomService {
         useTime.set(!requestDto.isCheck());
         useTimeRepository.save(useTime);
         RoomReservationList roomReservationList = new RoomReservationList();
-        User user = userRepository.findById(1L).orElseThrow(()
+        Users users = usersRepository.findById(1L).orElseThrow(()
         -> new NullPointerException("해당 인원은 없습니다."));
-        String name = user.getName();
-        // String name = "하헌준"
+        String name = users.getName();
+//         String name = "하헌준";
         roomReservationList.gain(name, useTime.getRoom().getRoomName(), useTime);
         ResponseDto responseDto = new ResponseDto("예약이 완료되었습니다.");
         roomReservationListRepository.save(roomReservationList);
@@ -45,6 +45,7 @@ public class RoomService {
     public List<Room> getRoom(String floors) {
         List<Room> roomList = roomRepository.findAllByFloors(floors);
         return roomList;
+        // 층 조회
     }
 
     public List<RoomUseTime> getRoomTime(Long id) {
@@ -65,15 +66,12 @@ public class RoomService {
             useTimeRepository.save(roomUseTime);
 
         RoomReservationList roomReservationList = new RoomReservationList();
-        User user = userRepository.findById(1L).orElseThrow(()
+        Users users = usersRepository.findById(1L).orElseThrow(()
                 -> new NullPointerException("해당 인원은 없습니다."));
 
-        String name = user.getName();
+        String name = users.getName();
             roomReservationList.abc(roomUseTime, name,roomUseTime.getRoom().getRoomName());
             roomReservationListRepository.save(roomReservationList);
             return new ResponseDto("수정을 완료되었습니다.");
-
-
     }
-
 }

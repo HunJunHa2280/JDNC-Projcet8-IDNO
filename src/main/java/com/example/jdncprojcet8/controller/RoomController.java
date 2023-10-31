@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("http://127.0.0.1:3001") // 컨트롤러에서 설정해주는 CrossOrigin
 @RestController
 @RequiredArgsConstructor
 // 파이널 필드를 사용하기 위해서 사용
@@ -36,9 +37,9 @@ public class RoomController {
         return roomService.createBook(requestDto);
     }
 
-//    @PutMapping("/room-time/{id}")
-//    public ResponseDto updateRoomTime(@PathVariable Long id, @RequestBody CancelRequestDto cancelRequestDto) {
-//        return roomService.updateRoomTime(id, cancelRequestDto);
-//    }
+    @PutMapping("/room-time/{id}")
+    public ResponseDto updateRoomTime(@PathVariable Long id, @RequestBody CancelRequestDto cancelRequestDto) {
+        return roomService.updateRoomTime(id, cancelRequestDto);
+    }
 
 }
