@@ -5,8 +5,10 @@ import lombok.Getter;
 @Getter
 public class RequestDto {
 
-    private Long id;
+    private String roomName;
 
     private boolean check;
+
+    private String time;
 
 }

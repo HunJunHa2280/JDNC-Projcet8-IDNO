@@ -9,4 +9,6 @@ import java.util.List;
 public interface RoomUseTimeRepository extends JpaRepository<RoomUseTime, Long> {
 
     List<RoomUseTime> findAllByRoom(Room room);
+
+    RoomUseTime findByRoomAndTime(Room room, String time);
 }

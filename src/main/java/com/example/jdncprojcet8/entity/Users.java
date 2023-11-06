@@ -28,4 +28,5 @@ public class Users {
 
     @Column
     private LocalDateTime updatedAt;
+
 }
