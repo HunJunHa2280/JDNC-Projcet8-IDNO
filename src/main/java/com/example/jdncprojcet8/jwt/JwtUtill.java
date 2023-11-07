@@ -5,6 +5,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,13 +14,14 @@ import org.springframework.util.StringUtils;
 import java.security.Key;
 import java.util.Base64;
 
-@Slf4j(topic = "JwtUtil")
+@Slf4j(topic = "JwtUtill")
 @Component
+@RequiredArgsConstructor
 public class JwtUtill {
     // Header KEY 값
     public static final String AUTHORIZATION_HEADER = "Authorization"; //이거 이름ㅇ; "Authorization";
     // 사용자 권한 값의 KEY
-    public static final String AUTHORIZATION_KEY = "auth"; // 이거 이름이 auth다
+//    public static final String AUTHORIZATION_KEY = "auth"; // 이거 이름이 auth다
     // Token 식별자
     public static final String BEARER_PREFIX = "Bearer "; // 이거 이름이 "Bearer
     // 토큰 만료시간
