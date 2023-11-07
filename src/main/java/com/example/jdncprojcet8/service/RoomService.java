@@ -61,7 +61,7 @@ public class RoomService {
     }
 
     @Transactional
-    public ResponseDto updateRoomTime(Long id, CancelRequestDto cancelRequestDto) {
+    public ResponseDto updateRoomTime(Long id, CancelRequestDto cancelRequestDto, String username) {
         // 찾아 오기
         RoomUseTime roomUseTime = useTimeRepository.findById(id).orElseThrow(()->
            new NullPointerException("해당 접근은 잘못된 접근입니다."));
@@ -71,11 +71,11 @@ public class RoomService {
             useTimeRepository.save(roomUseTime);
 
         RoomReservationList roomReservationList = new RoomReservationList();
-        Users users = usersRepository.findById(1L).orElseThrow(()
+        Users users = usersRepository.findByName(username).orElseThrow(()
                 -> new NullPointerException("해당 인원은 없습니다."));
 
         String name = users.getName();
-            roomReservationList.abc(roomUseTime, name,roomUseTime.getRoom().getRoomName());
+            roomReservationList.abc(roomUseTime, name,roomUseTime.getRoom().getRoomName()); // 예약어 피하려고 그냥 대충 abc라 붙임
             roomReservationListRepository.save(roomReservationList);
             return new ResponseDto("수정을 완료되었습니다.");
     }

@@ -64,7 +64,7 @@ public class WebSecurityConfig {
 
 //                        .requestMatchers(HttpMethod.GET).permitAll()
 //                        .requestMatchers(HttpMethod.PUT).permitAll()
-//                        .requestMatchers(HttpMethod.POST).permitAll() 포스트맨 사용할때만 사용하도록
+//                        .requestMatchers(HttpMethod.POST).permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                         .requestMatchers("/").permitAll() // 메인 페이지 요청 허가
                         .requestMatchers("/api/auth/**").permitAll() // '/api/user/'로 시작하는 요청 모두 접근 허가

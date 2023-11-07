@@ -36,16 +36,13 @@ public class RoomController {
         return roomService.getRoomTime(id);
     }
 
-    @PostMapping("/room/book")
+    @PostMapping("/room/books")
     public ResponseDto requestDto(@RequestBody RequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return roomService.createBook(requestDto, userDetails.getUsername());
+        return roomService.createBook(requestDto, userDetails.getUsername()); // AuthenticationPrincipal, UserDetailsImpl
     }
 
     @PutMapping("/room-time/{id}")
-    public ResponseDto updateRoomTime(@PathVariable Long id, @RequestBody CancelRequestDto cancelRequestDto) {
-        return roomService.updateRoomTime(id, cancelRequestDto);
+    public ResponseDto updateRoomTime(@PathVariable Long id, @RequestBody CancelRequestDto cancelRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return roomService.updateRoomTime(id, cancelRequestDto, userDetails.getUsername());
     }
-
-
-
 }

@@ -3,7 +3,6 @@ package com.example.jdncprojcet8.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.mapping.ToOne;
 
 @Entity
 @Getter
@@ -39,4 +38,5 @@ public class RoomReservationList {
         this.room_use_time = roomUseTime;
         this.contents ="예약 취소";
     }
+    // 예약어 피하려고 이름을 대충 abc라고 작성
 }
